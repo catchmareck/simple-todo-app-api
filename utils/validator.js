@@ -9,8 +9,9 @@ class Validator {
 
     evaluate(value) {
 
-        for (let fn of this.validators) {
+        for (let i = 0; i < this.validators.length; i++) {
 
+            const fn = this.validators[i];
             if (!fn(value)) {
                 return false;
             }
@@ -24,6 +25,19 @@ class Validator {
         this._addValidator((value) => !!value && value.toString().trim().length > 0);
 
         return this;
+    }
+
+    optional() {
+
+        this._addValidator((value) => {
+
+            if (!value) {
+
+                this.validators = [];
+            }
+
+            return true;
+        })
     }
 
     string() {
@@ -50,6 +64,27 @@ class Validator {
     number() {
 
         this._addValidator((value) => Number.isInteger(value));
+
+        return this;
+    }
+
+    boolean() {
+
+        this._addValidator((value) => value === true || value === false);
+
+        return this;
+    }
+
+    date() {
+
+        this._addValidator((value) => (new Date(value)).toString() !== 'Invalid Date');
+
+        return this;
+    }
+
+    array(of) {
+
+        this._addValidator((value) => Array.isArray(value) && value.every((el) => of.indexOf(typeof el) !== -1));
 
         return this;
     }
