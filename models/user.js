@@ -1,5 +1,7 @@
 'use strict';
 
+const mysql = require('../utils/mysql-wrapper');
+
 class User {
 
     constructor() {}
@@ -17,6 +19,4 @@ class User {
     }
 }
 
-module.exports = {
-    User
-};
+module.exports = User

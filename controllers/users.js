@@ -1,6 +1,6 @@
 'use strict';
 
-const { User } = require('../models/user');
+const { User } = require('../models');
 const logger = require('../utils/logger');
 
 class UsersController {
