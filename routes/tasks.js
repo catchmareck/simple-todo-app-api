@@ -1,11 +1,11 @@
 'use strict';
 
+const router = require('express').Router({ mergeParams: true });
+
 const { TasksController } = require('../controllers');
 
 const validate = require('../middleware/validate');
 const TaskSchema = require('./validate/tasks-schema');
-
-const router = require('express').Router({ mergeParams: true });
 
 router.get('/read/:id', validate(TaskSchema.read), (request, response) => {
 
