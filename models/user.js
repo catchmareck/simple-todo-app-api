@@ -9,14 +9,19 @@ class User extends Model {
 
     create({ username, user_email, first_name, last_name }) {
 
-        // active = true
-        // display_name = first + last
-        return Promise.resolve('TODO');
+        return User.create({
+            username,
+            user_email,
+            first_name,
+            last_name,
+            display_name: `${first_name} ${last_name}`,
+            active: true
+        });
     }
 
     read({ user_id }) {
 
-        return Promise.resolve('TODO');
+        return User.findOne({ where: { user_id } });
     }
 }
 
