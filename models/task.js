@@ -1,10 +1,11 @@
 'use strict';
 
-const mysql = require('../utils/mysql-wrapper');
+const Sequelize = require('sequelize');
+const sequelize = require('./db');
 
-class Task {
+const Model = Sequelize.Model;
 
-    constructor() {}
+class Task extends Model {
 
     create({ list_id, task_title, task_description, is_done, task_deadline, assignees }) {
 
@@ -26,5 +27,37 @@ class Task {
         return Promise.resolve('TODO');
     }
 }
+
+Task.init({
+    taskId: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        allowNull: false,
+        primaryKey: true
+    },
+    taskTitle: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        validate: {
+            max: 255
+        }
+    },
+    taskDescription: {
+        type: Sequelize.TEXT,
+        allowNull: true
+    },
+    isDone: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false
+    },
+    taskDeadline: {
+        type: Sequelize.DATE,
+        allowNull: false
+    }
+}, {
+    sequelize,
+    modelName: 'task',
+    underscored: true
+});
 
 module.exports = Task;

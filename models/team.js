@@ -1,10 +1,11 @@
 'use strict';
 
-const mysql = require('../utils/mysql-wrapper');
+const Sequelize = require('sequelize');
+const sequelize = require('./db');
 
-class Team {
+const Model = Sequelize.Model;
 
-    constructor() {}
+class Team extends Model {
 
     create({ team_name, team_description }) {
 
@@ -31,5 +32,32 @@ class Team {
         return Promise.resolve('TODO');
     }
 }
+
+Team.init({
+    teamId: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        allowNull: false,
+        primaryKey: true
+    },
+    teamName: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        validate: {
+            max: 255
+        }
+    },
+    teamDescription: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        validate: {
+            max: 255
+        }
+    }
+}, {
+    sequelize,
+    modelName: 'team',
+    underscored: true
+});
 
 module.exports = Team;

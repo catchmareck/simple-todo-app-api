@@ -6,7 +6,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-const { port } = require('./config');
+const db = require('./models/db');
+
+const { port, env } = require('./config');
 const logger = require('./utils/logger');
 
 const routes = require('./routes');
@@ -18,7 +20,11 @@ app.use(bodyParser.json());
 
 app.use(routes);
 
-app.listen(port, () => {
+db.sync({ ...(env !== 'prd' && { force: true }) })
+    .then(() => {
+        app.listen(port, () => {
 
-    logger.info(`Listening on port ${port}`);
-});
+            logger.info(`Listening on port ${port}`);
+        });
+    })
+    .catch(logger.error);

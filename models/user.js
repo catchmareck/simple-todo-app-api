@@ -1,10 +1,11 @@
 'use strict';
 
-const mysql = require('../utils/mysql-wrapper');
+const Sequelize = require('sequelize');
+const sequelize = require('./db');
 
-class User {
+const Model = Sequelize.Model;
 
-    constructor() {}
+class User extends Model {
 
     create({ username, user_email, first_name, last_name }) {
 
@@ -18,5 +19,55 @@ class User {
         return Promise.resolve('TODO');
     }
 }
+
+User.init({
+    userId: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        allowNull: false,
+        primaryKey: true
+    },
+    username: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        validate: {
+            max: 75
+        }
+    },
+    userEmail: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    displayName: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        validate: {
+            max: 255
+        }
+    },
+    firstName: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        validate: {
+            max: 255
+        }
+    },
+    lastName: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        validate: {
+            max: 255
+        }
+    },
+    active: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
+    }
+}, {
+    sequelize,
+    modelName: 'user',
+    underscored: true
+});
 
 module.exports = User;

@@ -37,7 +37,9 @@ class Validator {
             }
 
             return true;
-        })
+        });
+
+        return this;
     }
 
     string() {
