@@ -2,29 +2,29 @@
 
 const mysql = require('../utils/mysql-wrapper');
 
-class Task {
+class TaskList {
 
     constructor() {}
 
-    create({ list_id, task_title, task_description, is_done, task_deadline, assignees }) {
+    create({ list_name }) {
 
         return Promise.resolve('TODO');
     }
 
-    read({ task_id }) {
+    read({ list_id }) {
 
         return Promise.resolve('TODO');
     }
 
-    update({ task_id, list_id, task_title, task_description, is_done, task_deadline, assignees }) {
+    update({ list_id, list_name }) {
 
         return Promise.resolve('TODO');
     }
 
-    delete({ task_id }) {
+    delete({ list_id }) {
 
         return Promise.resolve('TODO');
     }
 }
 
-module.exports = Task;
+module.exports = TaskList;
