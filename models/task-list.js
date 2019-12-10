@@ -7,24 +7,34 @@ const Model = Sequelize.Model;
 
 class TaskList extends Model {
 
-    create({ list_name }) {
+    create({ team_id, list_name }) {
 
-        return Promise.resolve('TODO');
+        return TaskList.create({ list_name })
+            .then((record) => {
+
+                record.setTeam(team_id);
+                return record.save();
+            })
     }
 
-    read({ list_id }) {
+    read({ team_id, list_id }) {
 
-        return Promise.resolve('TODO');
+        return TaskList.findOne({
+            where: {
+                ...!!team_id && { team_id },
+                ...!!list_id && { list_id }
+            }
+        });
     }
 
     update({ list_id, list_name }) {
 
-        return Promise.resolve('TODO');
+        return TaskList.update({ list_name }, { where: { list_id }});
     }
 
     delete({ list_id }) {
 
-        return Promise.resolve('TODO');
+        return TaskList.destroy({ where: { list_id } });
     }
 }
 

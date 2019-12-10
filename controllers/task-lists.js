@@ -15,18 +15,21 @@ class TaskListsController {
 
     list() {
 
-        this.model.read({})
+        const { teamId: team_id } = this.request.params;
+        this.model.read({ team_id })
             .then((result) => this.response.send(result))
             .catch(logger.error);
     }
 
     add() {
 
+        const { teamId: team_id } = this.request.params;
         const {
             listName: list_name
         } = this.request.body;
 
         this.model.create({
+            team_id,
             list_name
         })
             .then((result) => this.response.send(result))
