@@ -9,22 +9,35 @@ class Task extends Model {
 
     create({ list_id, task_title, task_description, is_done, task_deadline, assignees }) {
 
-        return Promise.resolve('TODO');
+        return Task.create({ task_title, task_description, task_deadline, is_done })
+            .then((record) => {
+
+                record.setList(list_id);
+                record.addUsers(assignees);
+
+                return record.save();
+            });
     }
 
     read({ task_id }) {
 
-        return Promise.resolve('TODO');
+        return Task.findAll({ where: { ...!!task_id && { task_id } } });
     }
 
     update({ task_id, list_id, task_title, task_description, is_done, task_deadline, assignees }) {
 
-        return Promise.resolve('TODO');
+        return Task.update({ list_id, task_title, task_description, is_done, task_deadline }, { where: { task_id } })
+            .then((record) => {
+
+                record.setUsers(assignees);
+
+                return record.save();
+            });
     }
 
     delete({ task_id }) {
 
-        return Promise.resolve('TODO');
+        return Task.destroy({ where: { task_id } });
     }
 }
 

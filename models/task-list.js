@@ -19,7 +19,7 @@ class TaskList extends Model {
 
     read({ team_id, list_id }) {
 
-        return TaskList.findOne({
+        return TaskList.findAll({
             where: {
                 ...!!team_id && { team_id },
                 ...!!list_id && { list_id }
