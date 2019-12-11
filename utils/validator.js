@@ -22,7 +22,7 @@ class Validator {
 
     required() {
 
-        this._addValidator((value) => !!value && value.toString().trim().length > 0);
+        this._addValidator((value) => typeof value !== 'undefined' && value !== null && value.toString().trim().length > 0);
 
         return this;
     }

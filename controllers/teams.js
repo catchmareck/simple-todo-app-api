@@ -47,7 +47,7 @@ class TeamsController {
 
     details() {
 
-        const { teamId } = this.request.params;
+        const { id: teamId } = this.request.params;
 
         this.model.read({ teamId })
             .then((result) => this.response.send(result))

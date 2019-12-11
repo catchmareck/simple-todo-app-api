@@ -12,7 +12,7 @@ class Task extends Model {
         return Task.create({ taskTitle, taskDescription, taskDeadline, isDone })
             .then((record) => {
 
-                record.setList(listId);
+                record.setTasklist(listId);
                 record.addUsers(assignees);
 
                 return record.save();
@@ -21,12 +21,13 @@ class Task extends Model {
 
     read({ taskId }) {
 
-        return Task.findAll({ where: { ...!!taskId && { taskId } } });
+        return Task.findAll({ where: { ...!!taskId && { taskId } }, include: [{ all: true }] });
     }
 
     update({ taskId, listId, taskTitle, taskDescription, isDone, taskDeadline, assignees }) {
 
         return Task.update({ listId, taskTitle, taskDescription, isDone, taskDeadline }, { where: { taskId } })
+            .then(() => Task.findOne({ where: { taskId } }))
             .then((record) => {
 
                 record.setUsers(assignees);

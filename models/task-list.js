@@ -7,12 +7,12 @@ const Model = Sequelize.Model;
 
 class TaskList extends Model {
 
-    create({ team_id, list_name }) {
+    create({ teamId, listName }) {
 
-        return TaskList.create({ list_name })
+        return TaskList.create({ listName })
             .then((record) => {
 
-                record.setTeam(team_id);
+                record.setTeam(teamId);
                 return record.save();
             })
     }
@@ -21,9 +21,10 @@ class TaskList extends Model {
 
         return TaskList.findAll({
             where: {
-                ...!!teamId && { teamId },
+                ...!!teamId && { team_id: teamId },
                 ...!!listId && { listId }
-            }
+            },
+            include: [{ all: true }]
         });
     }
 

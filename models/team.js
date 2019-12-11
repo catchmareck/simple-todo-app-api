@@ -12,9 +12,9 @@ class Team extends Model {
         return Team.create({ teamName, teamDescription });
     }
 
-    read({ team_id }) {
+    read({ teamId }) {
 
-        return Team.findOne({ where: { team_id } });
+        return Team.findOne({ where: { teamId }, include: [{ all: true }] });
     }
 
     update({ teamId, teamName, teamDescription }) {
@@ -24,12 +24,22 @@ class Team extends Model {
 
     addMember({ teamId, memberId }) {
 
-        return Team.findOne({ where: { teamId }}).addUser(memberId);
+        return Team.findOne({ where: { teamId }})
+            .then((record) => {
+
+                record.addUser(memberId);
+                return record;
+            });
     }
 
     deleteMember({ teamId, memberId }) {
 
-        return Team.findOne({ where: { teamId }}).removeUser(memberId);
+        return Team.findOne({ where: { teamId }})
+            .then((record) => {
+
+                record.removeUser(memberId);
+                return record;
+            });
     }
 }
 

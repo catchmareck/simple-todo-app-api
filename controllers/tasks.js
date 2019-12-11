@@ -70,16 +70,16 @@ class TasksController {
 
     delete() {
 
-        const { taskId } = this.request.params;
+        const { id: taskId } = this.request.params;
 
         this.model.delete({ taskId })
-            .then((result) => this.response.send(result))
+            .then(() => this.response.sendStatus(200))
             .catch(logger.error);
     }
 
     details() {
 
-        const { taskId } = this.request.params;
+        const { id: taskId } = this.request.params;
 
         this.model.read({ taskId })
             .then((result) => this.response.send(result))

@@ -49,16 +49,16 @@ class TaskListsController {
 
     delete() {
 
-        const { listId } = this.request.params;
+        const { id: listId } = this.request.params;
 
         this.model.delete({ listId })
-            .then((result) => this.response.send(result))
+            .then(() => this.response.send(200))
             .catch(logger.error);
     }
 
     details() {
 
-        const { listId } = this.request.params;
+        const { id: listId } = this.request.params;
 
         this.model.read({ listId })
             .then((result) => this.response.send(result))
