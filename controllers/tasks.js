@@ -23,20 +23,20 @@ class TasksController {
     add() {
 
         const {
-            listId: list_id,
-            taskTitle: task_title,
-            taskDescription: task_description,
-            isDone: is_done,
-            taskDeadline: task_deadline,
+            listId,
+            taskTitle,
+            taskDescription,
+            isDone,
+            taskDeadline,
             assignees
         } = this.request.body;
 
         this.model.create({
-            list_id,
-            task_title,
-            task_description,
-            is_done,
-            task_deadline,
+            listId,
+            taskTitle,
+            taskDescription,
+            isDone,
+            taskDeadline,
             assignees
         })
             .then((result) => this.response.send(result))
@@ -45,23 +45,23 @@ class TasksController {
 
     edit() {
 
-        const { id: task_id } = this.request.params;
+        const { id: taskId } = this.request.params;
         const {
-            listId: list_id,
-            taskTitle: task_title,
-            taskDescription: task_description,
-            isDone: is_done,
-            taskDeadline: task_deadline,
+            listId,
+            taskTitle,
+            taskDescription,
+            isDone,
+            taskDeadline,
             assignees
         } = this.request.body;
 
         this.model.update({
-            task_id,
-            list_id,
-            task_title,
-            task_description,
-            is_done,
-            task_deadline,
+            taskId,
+            listId,
+            taskTitle,
+            taskDescription,
+            isDone,
+            taskDeadline,
             assignees
         })
             .then((result) => this.response.send(result))
@@ -70,18 +70,18 @@ class TasksController {
 
     delete() {
 
-        const { taskId: task_id } = this.request.params;
+        const { taskId } = this.request.params;
 
-        this.model.delete({ task_id })
+        this.model.delete({ taskId })
             .then((result) => this.response.send(result))
             .catch(logger.error);
     }
 
     details() {
 
-        const { taskId: task_id } = this.request.params;
+        const { taskId } = this.request.params;
 
-        this.model.read({ task_id })
+        this.model.read({ taskId })
             .then((result) => this.response.send(result))
             .catch(logger.error);
     }

@@ -16,13 +16,13 @@ class TeamsController {
     add() {
 
         const {
-            teamName: team_name,
-            teamDescription: team_description
+            teamName,
+            teamDescription
         } = this.request.body;
 
         this.model.create({
-            team_name,
-            team_description
+            teamName,
+            teamDescription
         })
             .then((result) => this.response.send(result))
             .catch(logger.error);
@@ -30,16 +30,16 @@ class TeamsController {
 
     edit() {
 
-        const { id: team_id } = this.request.params;
+        const { id: teamId } = this.request.params;
         const {
-            teamName: team_name,
-            teamDescription: team_description
+            teamName,
+            teamDescription
         } = this.request.body;
 
         this.model.update({
-            team_id,
-            team_name,
-            team_description
+            teamId,
+            teamName,
+            teamDescription
         })
             .then((result) => this.response.send(result))
             .catch(logger.error);
@@ -47,20 +47,20 @@ class TeamsController {
 
     details() {
 
-        const { teamId: team_id } = this.request.params;
+        const { teamId } = this.request.params;
 
-        this.model.read({ team_id })
+        this.model.read({ teamId })
             .then((result) => this.response.send(result))
             .catch(logger.error);
     }
 
     addMember() {
 
-        const { teamId: team_id, memberId: member_id } = this.request.params;
+        const { teamId, memberId } = this.request.params;
 
         this.model.addMember({
-            team_id,
-            member_id
+            teamId,
+            memberId
         })
             .then((result) => this.response.send(result))
             .catch(logger.error);
@@ -68,11 +68,11 @@ class TeamsController {
 
     deleteMember() {
 
-        const { teamId: team_id, memberId: member_id } = this.request.params;
+        const { teamId, memberId } = this.request.params;
 
         this.model.deleteMember({
-            team_id,
-            member_id
+            teamId,
+            memberId
         })
             .then((result) => this.response.send(result))
             .catch(logger.error);

@@ -17,24 +17,24 @@ class TaskList extends Model {
             })
     }
 
-    read({ team_id, list_id }) {
+    read({ teamId, listId }) {
 
         return TaskList.findAll({
             where: {
-                ...!!team_id && { team_id },
-                ...!!list_id && { list_id }
+                ...!!teamId && { teamId },
+                ...!!listId && { listId }
             }
         });
     }
 
-    update({ list_id, list_name }) {
+    update({ listId, listName }) {
 
-        return TaskList.update({ list_name }, { where: { list_id }});
+        return TaskList.update({ listName }, { where: { listId }});
     }
 
-    delete({ list_id }) {
+    delete({ listId }) {
 
-        return TaskList.destroy({ where: { list_id } });
+        return TaskList.destroy({ where: { listId } });
     }
 }
 

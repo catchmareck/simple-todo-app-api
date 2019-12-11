@@ -7,21 +7,21 @@ const Model = Sequelize.Model;
 
 class User extends Model {
 
-    create({ username, user_email, first_name, last_name }) {
+    create({ username, userEmail, firstName, lastName }) {
 
         return User.create({
             username,
-            user_email,
-            first_name,
-            last_name,
-            display_name: `${first_name} ${last_name}`,
+            userEmail,
+            firstName,
+            lastName,
+            displayName: `${firstName} ${lastName}`,
             active: true
         });
     }
 
-    read({ user_id }) {
+    read({ userId }) {
 
-        return User.findAll({ where: { ...!!user_id && { user_id } } });
+        return User.findAll({ where: { ...!!userId && { userId } } });
     }
 }
 

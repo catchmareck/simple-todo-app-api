@@ -7,26 +7,26 @@ const Model = Sequelize.Model;
 
 class Task extends Model {
 
-    create({ list_id, task_title, task_description, is_done, task_deadline, assignees }) {
+    create({ listId, taskTitle, taskDescription, isDone, taskDeadline, assignees }) {
 
-        return Task.create({ task_title, task_description, task_deadline, is_done })
+        return Task.create({ taskTitle, taskDescription, taskDeadline, isDone })
             .then((record) => {
 
-                record.setList(list_id);
+                record.setList(listId);
                 record.addUsers(assignees);
 
                 return record.save();
             });
     }
 
-    read({ task_id }) {
+    read({ taskId }) {
 
-        return Task.findAll({ where: { ...!!task_id && { task_id } } });
+        return Task.findAll({ where: { ...!!taskId && { taskId } } });
     }
 
-    update({ task_id, list_id, task_title, task_description, is_done, task_deadline, assignees }) {
+    update({ taskId, listId, taskTitle, taskDescription, isDone, taskDeadline, assignees }) {
 
-        return Task.update({ list_id, task_title, task_description, is_done, task_deadline }, { where: { task_id } })
+        return Task.update({ listId, taskTitle, taskDescription, isDone, taskDeadline }, { where: { taskId } })
             .then((record) => {
 
                 record.setUsers(assignees);
@@ -35,9 +35,9 @@ class Task extends Model {
             });
     }
 
-    delete({ task_id }) {
+    delete({ taskId }) {
 
-        return Task.destroy({ where: { task_id } });
+        return Task.destroy({ where: { taskId } });
     }
 }
 

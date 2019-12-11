@@ -24,16 +24,16 @@ class UsersController {
 
         const {
             username,
-            userEmail: user_email,
-            firstName: first_name,
-            lastName: last_name,
+            userEmail,
+            firstName,
+            lastName,
         } = this.request.body;
 
         this.model.create({
             username,
-            user_email,
-            first_name,
-            last_name
+            userEmail,
+            firstName,
+            lastName
         })
             .then((result) => this.response.send(result))
             .catch(logger.error);
@@ -41,9 +41,9 @@ class UsersController {
 
     details() {
 
-        const { userId: user_id } = this.request.params;
+        const { userId } = this.request.params;
 
-        this.model.read({ user_id })
+        this.model.read({ userId })
             .then((result) => this.response.send(result))
             .catch(logger.error);
     }

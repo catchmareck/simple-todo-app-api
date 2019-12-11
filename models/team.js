@@ -7,9 +7,9 @@ const Model = Sequelize.Model;
 
 class Team extends Model {
 
-    create({ team_name, team_description }) {
+    create({ teamName, teamDescription }) {
 
-        return Team.create({ team_name, team_description });
+        return Team.create({ teamName, teamDescription });
     }
 
     read({ team_id }) {
@@ -17,19 +17,19 @@ class Team extends Model {
         return Team.findOne({ where: { team_id } });
     }
 
-    update({ team_id, team_name, team_description }) {
+    update({ teamId, teamName, teamDescription }) {
 
-        return Team.update({ team_name, team_description }, { where: { team_id }});
+        return Team.update({ teamName, teamDescription }, { where: { teamId }});
     }
 
-    addMember({ team_id, member_id }) {
+    addMember({ teamId, memberId }) {
 
-        return Team.findOne({ where: { team_id }}).addUser(member_id);
+        return Team.findOne({ where: { teamId }}).addUser(memberId);
     }
 
-    deleteMember({ team_id, member_id }) {
+    deleteMember({ teamId, memberId }) {
 
-        return Team.findOne({ where: { team_id }}).removeUser(member_id);
+        return Team.findOne({ where: { teamId }}).removeUser(memberId);
     }
 }
 

@@ -15,22 +15,20 @@ class TaskListsController {
 
     list() {
 
-        const { teamId: team_id } = this.request.params;
-        this.model.read({ team_id })
+        const { teamId } = this.request.params;
+        this.model.read({ teamId })
             .then((result) => this.response.send(result))
             .catch(logger.error);
     }
 
     add() {
 
-        const { teamId: team_id } = this.request.params;
-        const {
-            listName: list_name
-        } = this.request.body;
+        const { teamId } = this.request.params;
+        const { listName } = this.request.body;
 
         this.model.create({
-            team_id,
-            list_name
+            teamId,
+            listName
         })
             .then((result) => this.response.send(result))
             .catch(logger.error);
@@ -38,14 +36,12 @@ class TaskListsController {
 
     edit() {
 
-        const { id: list_id } = this.request.params;
-        const {
-            listName: list_name
-        } = this.request.body;
+        const { id: listId } = this.request.params;
+        const { listName } = this.request.body;
 
         this.model.update({
-            list_id,
-            list_name
+            listId,
+            listName
         })
             .then((result) => this.response.send(result))
             .catch(logger.error);
@@ -53,18 +49,18 @@ class TaskListsController {
 
     delete() {
 
-        const { listId: list_id } = this.request.params;
+        const { listId } = this.request.params;
 
-        this.model.delete({ list_id })
+        this.model.delete({ listId })
             .then((result) => this.response.send(result))
             .catch(logger.error);
     }
 
     details() {
 
-        const { listId: list_id } = this.request.params;
+        const { listId } = this.request.params;
 
-        this.model.read({ list_id })
+        this.model.read({ listId })
             .then((result) => this.response.send(result))
             .catch(logger.error);
     }
