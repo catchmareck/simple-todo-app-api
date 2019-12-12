@@ -17,12 +17,14 @@ class TeamsController {
 
         const {
             teamName,
-            teamDescription
+            teamDescription,
+            adminId
         } = this.request.body;
 
         this.model.create({
             teamName,
-            teamDescription
+            teamDescription,
+            adminId
         })
             .then((result) => this.response.send(result))
             .catch(logger.error);

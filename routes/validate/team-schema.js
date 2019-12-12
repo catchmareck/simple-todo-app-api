@@ -6,7 +6,8 @@ module.exports = {
     create: {
         body: {
             teamName: Is().required().string().maxLen(255),
-            teamDescription: Is().optional().string().maxLen(255)
+            teamDescription: Is().optional().string().maxLen(255),
+            adminId: Is().required().number()
         }
     },
     read: {

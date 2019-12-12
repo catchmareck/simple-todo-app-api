@@ -7,9 +7,15 @@ const Model = Sequelize.Model;
 
 class Team extends Model {
 
-    create({ teamName, teamDescription }) {
+    create({ teamName, teamDescription, adminId }) {
 
-        return Team.create({ teamName, teamDescription });
+        return Team.create({ teamName, teamDescription })
+            .then((record) => {
+
+                record.addUser(adminId);
+                record.setTeamAdmin(adminId);
+                return record;
+            });
     }
 
     read({ teamId }) {
