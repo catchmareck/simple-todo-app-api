@@ -26,10 +26,11 @@ class Task extends Model {
 
     update({ taskId, listId, taskTitle, taskDescription, isDone, taskDeadline, assignees }) {
 
-        return Task.update({ listId, taskTitle, taskDescription, isDone, taskDeadline }, { where: { taskId } })
+        return Task.update({ taskTitle, taskDescription, isDone, taskDeadline }, { where: { taskId } })
             .then(() => Task.findOne({ where: { taskId } }))
             .then((record) => {
 
+                record.setTasklist(listId);
                 record.setUsers(assignees);
 
                 return record.save();

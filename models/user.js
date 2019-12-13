@@ -21,7 +21,7 @@ class User extends Model {
 
     read({ userId }) {
 
-        return User.findAll({ where: { ...!!userId && { userId } } });
+        return User.findAll({ where: { ...!!userId && { userId } }, include: [{ all: true }] });
     }
 }
 

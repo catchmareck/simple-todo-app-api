@@ -9,7 +9,7 @@ module.exports = {
             taskTitle: Is().required().string().maxLen(255),
             taskDescription: Is().required().string(),
             isDone: Is().required().boolean(),
-            taskDeadline: Is().required().date(),
+            taskDeadline: Is().required().string(),
             assignees: Is().optional().array(['number'])
         }
     },
@@ -27,7 +27,7 @@ module.exports = {
             taskTitle: Is().required().string().maxLen(255),
             taskDescription: Is().required().string(),
             isDone: Is().required().boolean(),
-            taskDeadline: Is().required().date(),
+            taskDeadline: Is().required().string(),
             assignees: Is().optional().array(['number'])
         }
     },
