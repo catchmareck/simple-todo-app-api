@@ -3,6 +3,7 @@
 require('dotenv').config({ path: '.env' });
 
 const express = require('express');
+const session = require('express-session');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
@@ -17,6 +18,11 @@ const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(session({
+    secret: 'work hard',
+    resave: true,
+    saveUninitialized: false
+}));
 
 app.use(routes);
 

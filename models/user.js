@@ -7,7 +7,7 @@ const Model = Sequelize.Model;
 
 class User extends Model {
 
-    create({ username, userEmail, firstName, lastName }) {
+    create({ username, userEmail, firstName, lastName, password }) {
 
         return User.create({
             username,
@@ -15,13 +15,14 @@ class User extends Model {
             firstName,
             lastName,
             displayName: `${firstName} ${lastName}`,
+            password,
             active: true
         });
     }
 
-    read({ userId }) {
+    read({ userId, username }) {
 
-        return User.findAll({ where: { ...!!userId && { userId } }, include: [{ all: true }] });
+        return User.findAll({ where: { ...!!userId && { userId }, ...!!username && { username } }, include: [{ all: true }] });
     }
 }
 
@@ -37,7 +38,8 @@ User.init({
         allowNull: false,
         validate: {
             max: 75
-        }
+        },
+        unique: true
     },
     userEmail: {
         type: Sequelize.STRING,
@@ -63,6 +65,10 @@ User.init({
         validate: {
             max: 255
         }
+    },
+    password: {
+        type: Sequelize.STRING,
+        allowNull: false
     },
     active: {
         type: Sequelize.BOOLEAN,

@@ -12,9 +12,11 @@ class Team extends Model {
         return Team.create({ teamName, teamDescription })
             .then((record) => {
 
-                record.addUser(adminId);
-                record.setTeamAdmin(adminId);
-                return record;
+                return Promise.all([
+                    record.addUser(adminId),
+                    record.setTeamAdmin(adminId)
+                ])
+                    .then(() => record);
             });
     }
 
