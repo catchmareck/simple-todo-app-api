@@ -25,6 +25,12 @@ router.post('/create', validate(UsersSchema.create), (request, response) => {
     controller.add();
 });
 
+router.put('/update/:id', validate(UsersSchema.update), (request, response) => {
+
+    const controller = new UsersController(request, response);
+    controller.edit();
+});
+
 router.put('/login', validate(UsersSchema.login), (request, response) => {
 
     const controller = new UsersController(request, response);

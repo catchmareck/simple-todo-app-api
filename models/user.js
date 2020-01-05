@@ -24,6 +24,17 @@ class User extends Model {
 
         return User.findAll({ where: { ...!!userId && { userId }, ...!!username && { username } }, include: [{ all: true }] });
     }
+
+    update({ userId, roles }) {
+
+        return User.findOne( { where: { userId } })
+            .then((record) => {
+
+                record.setRoles(roles);
+
+                return record.save();
+            });
+    }
 }
 
 User.init({

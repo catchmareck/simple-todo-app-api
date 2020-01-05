@@ -44,6 +44,16 @@ class UsersController {
             .catch(logger.error);
     }
 
+    edit() {
+
+        const { id: userId } = this.request.params;
+        const { roles } = this.request.body;
+
+        this.model.update({ userId, roles })
+            .then((result) => this.response.send(result))
+            .catch(logger.error);
+    }
+
     details() {
 
         const { id: userId } = this.request.params;

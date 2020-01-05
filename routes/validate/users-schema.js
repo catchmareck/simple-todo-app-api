@@ -17,6 +17,14 @@ module.exports = {
             id: Is().required().string()
         }
     },
+    update: {
+        params: {
+            id: Is().required().string()
+        },
+        body: {
+            roles: Is().required().array(['number'])
+        }
+    },
     login: {
         body: {
             username: Is().required().string(),
