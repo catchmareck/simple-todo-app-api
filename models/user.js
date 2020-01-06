@@ -22,7 +22,7 @@ class User extends Model {
 
     read({ userId, username }) {
 
-        return User.findAll({ where: { ...!!userId && { userId }, ...!!username && { username } }, include: [{ all: true }] });
+        return User.findAll({ where: { ...!!userId && { userId }, ...!!username && { username } }, include: [{ all: true, include:[{ all: true }] }] });
     }
 
     update({ userId, roles }) {
