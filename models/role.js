@@ -14,7 +14,7 @@ class Role extends Model {
 
     read({ roleId }) {
 
-        return Role.findOne({ where: { ...!!roleId && { roleId } }, include: [{ all: true }] });
+        return Role.findAll({ where: { ...!!roleId && { roleId } }, include: [{ all: true }] });
     }
 
     update({ roleId, roleName}) {
