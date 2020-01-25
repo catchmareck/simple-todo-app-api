@@ -22,7 +22,11 @@ module.exports = {
             id: Is().required().string()
         },
         body: {
-            roles: Is().required().array(['number'])
+            roles: Is().optional().array(['number']),
+            username: Is().optional().string().maxLen(75),
+            userEmail: Is().optional().email(),
+            firstName: Is().optional().string().maxLen(255),
+            lastName: Is().optional().string().maxLen(255)
         }
     },
     login: {

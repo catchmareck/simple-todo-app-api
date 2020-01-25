@@ -47,9 +47,15 @@ class UsersController {
     edit() {
 
         const { id: userId } = this.request.params;
-        const { roles } = this.request.body;
+        const {
+            roles,
+            username,
+            userEmail,
+            firstName,
+            lastName
+        } = this.request.body;
 
-        this.model.update({ userId, roles })
+        this.model.update({ userId, roles, username, userEmail, firstName, lastName })
             .then((result) => this.response.send(result))
             .catch(logger.error);
     }
